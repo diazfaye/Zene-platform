@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">   
+
+    <h:body> 
+        <ui:composition template="../resources/template/gerant.xhtml" >  
+            <ui:define name="content" > 
+                <composants:now  message="Vérification" />
+                <br/>
+                <div class="p-grid container p-justify-center"> 
+                    <div class="p-col-5 info p-m-1">
+                        <h:form>
+                            <p:growl id="msg" />
+                            <h:panelGrid id="grid" width="100%" columns="1" cellspacing="15">
+                                <p:outputLabel value="Entrez un montant" />
+                                <p:inputText style="width: 100%" value="#{verif.montant}" >    
+                                    <f:ajax event="keyup" render="out1 out2 out3 out4" listener="#{verif.verify()}" />
+                                </p:inputText> 
+                                <p:outputLabel id="out1" value="Montant #{verif.montant}" />
+                                <p:outputLabel id="out2" value="Frais #{verif.cout}" />
+                                <p:outputLabel id="out3" value="Ma commision #{verif.mongain}" />
+                                <p:outputLabel id="out4" value="Montant final #{verif.mtfinal}" /> 
+                                <p:messages/>
+                            </h:panelGrid>
+                        </h:form> 
+                    </div> 
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

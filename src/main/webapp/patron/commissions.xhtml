@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="../resources/template/patron.xhtml" >
+        <ui:define name="content" >
+            <composants:now message="Les commissions"/>
+            <br/>
+            <p:dataTable value="#{info.xen.transfertsETRetraits()}" var="trans" > 
+                <p:column styleClass="colonne" headerText="Numero">
+                    <p:outputLabel styleClass="element" value="#{trans.id}" />
+                </p:column> 
+                <p:column styleClass="colonne" headerText="Agence">
+                    <p:outputLabel styleClass="element" value="#{trans.agence}" />
+                </p:column>
+                <p:column styleClass="colonne" headerText="Montant">
+                    <p:outputLabel styleClass="element" value="#{trans.montant}" />
+                </p:column>
+                <p:column styleClass="colonne" headerText="zene gain">
+                    <p:outputLabel styleClass="element" value="#{trans.xengain}" />
+                </p:column>
+                <p:column styleClass="colonne" headerText="agence gain">
+                    <p:outputLabel styleClass="element" value="#{trans.agencegain}" />
+                </p:column>
+                <p:column styleClass="colonne" headerText="Frais">
+                    <p:outputLabel styleClass="element" value="#{trans.frais}" />
+                </p:column> 
+                <p:column styleClass="colonne" headerText="Type">
+                    <p:outputLabel styleClass="element" value="#{trans.type}" />
+                </p:column>   
+                <p:column styleClass="colonne" headerText="Etat">
+                    <p:outputLabel styleClass="element" value="#{trans.etat}" />
+                </p:column> 
+                <p:column styleClass="colonne" headerText="Type">
+                    <p:outputLabel styleClass="element" value="#{trans.type}" />
+                </p:column>
+                <f:facet name="footer">
+                    Gain total de zene : #{info.xen.zeneGain()}   
+                </f:facet>
+            </p:dataTable>  
+        </ui:define>
+    </ui:composition>
+</html>
+

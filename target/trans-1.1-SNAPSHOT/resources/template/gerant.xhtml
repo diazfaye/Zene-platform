@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>ZENE AGENCE</title>
+    </h:head>
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />  
+    <h:outputStylesheet library="css" name="primeflex/primeflex.css" />
+    <h:outputStylesheet library="css" name="main.css" />
+    <h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/all.min-jsf.css" />
+    <h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+    <h:body>
+        <h:form>            
+            <div class="p-grid"> 
+                <div class="p-col-12 header">
+                    <div class="p-col-3">
+                        <h:graphicImage width="20%" name="zene.png" library="images" />
+                    </div>
+                    <div class="p-col user">
+                        <h:panelGrid columns="3">
+                            <p:commandButton styleClass="btn" action="home" icon="fa fa-home" value="Home">
+                                <p:ajax event="click" process="@this" />
+                            </p:commandButton> 
+                            <p:commandButton styleClass="btn" icon="fa fa-power-off" action="#{zeneController.logout()}"  value="Déconnexion"/> 
+                            <p:commandButton  styleClass="btn" icon="fa fa-user" value="GERANT"/> 
+                        </h:panelGrid> 
+                    </div>                    
+                </div> 
+                <div class="p-col-2 left">
+                    <p:menu toggleable="false" styleClass="menu">
+                        <p:submenu styleClass="submenu" label="Transaction">
+                            <p:menuitem styleClass="mitem" value="Transfert" action="transfert.xhtml" icon="fa  fa-share" />
+                            <p:menuitem styleClass="mitem" value="Retrait" action="retrait.xhtml" icon="fa  fa-reply"/>   
+                        </p:submenu>
+                        <p:submenu styleClass="submenu" label="Agence"> 
+                            <p:menuitem styleClass="mitem" value="Mon Compte" action="mon-compte.xhtml" icon="fa fa-user"/>
+                            <p:menuitem styleClass="mitem" value="Mes Transferts" action="mes-transferts.xhtml" icon="fa fa-table"/>
+                            <p:menuitem styleClass="mitem" value="Mes Retraits" action="mes-retraits.xhtml" icon="fa fa-table"/>
+                            <p:menuitem styleClass="mitem" value="Mes Transactions" action="mes-transactions.xhtml" icon="fa fa-table"/>
+                        </p:submenu>
+                        <p:submenu styleClass="submenu" label="Entreprises"> 
+                            <p:menuitem styleClass="mitem" value="Payer Facture"  action="facture.xhtml" icon="fa fa-tag"/> 
+                            <p:menuitem styleClass="mitem" value="Factures Payées" action="factures.xhtml"   icon="fa fa-table"/> 
+                            <p:menuitem styleClass="mitem" value="Mes commissions" action="commissions.xhtml" icon="fa fa-dollar"/> 
+                        </p:submenu>
+
+                        <p:submenu styleClass="submenu" label="Opération">  
+                            <p:menuitem styleClass="mitem" value="Verification" action="verifier.xhtml" icon="fa fa-eye"/>  
+                        </p:submenu>
+                        <p:submenu styleClass="submenu" label="Commissions">  
+                            <p:menuitem styleClass="mitem" value="Transferts" action="com-transfert.xhtml" icon="fa fa-tag"/> 
+                            <p:menuitem styleClass="mitem" value="Retraits" action="com-retrait.xhtml" icon="fa fa-tag"/> 
+                            <p:menuitem styleClass="mitem" value="Toutes" action="mes-commissions.xhtml" icon="fa  fa-tags"/> 
+                        </p:submenu>  
+                    </p:menu>
+                    <p:spacer/>
+                </div>
+                <div class="p-col-10 content">
+                    <ui:insert name="content" >Content</ui:insert>
+                </div> 
+                <div class="p-col-12 footer"/> 
+            </div>  
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>ZENE IDENTIFICATION</title>
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+	<h:outputStylesheet library="css" name="primeflex/primeflex.css" />
+	<h:outputStylesheet library="css" name="main.css" />
+</h:head>
+<style type="text/css">
+body {
+	background-color: #FFFFFF
+}
+
+#pass {
+	width: 100%;
+}
+
+.ui-inputtext {
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	border: 2px;
+	box-shadow: 1px 1px 1px black, -1px -1px 1px rgba(0, 0, 0, 0);
+}
+
+.ui-inputtext.pass {
+	width: 100%;
+	box-shadow: 1px 1px 1px, 1px 1px 1pxrgba(0, 0, 0, 0);
+	font-weight: bold;
+	text-align: center
+}
+
+.ui-outputlabel.label {
+	font-weight: bold;
+	color: #045491
+}
+
+.ui-button.identification {
+	width: 100%;
+	color: #045491;
+	background-color: #dddddd;
+	box-shadow: 2px 2px 2px #dddddd, -2px -2px 2px #dddddd;
+	border-radius: 5px;
+}
+
+.ui-button.identification:hover {
+	width: 100%;
+	background-color: #dddddd;
+	box-shadow: -0px -0px -2px #dddddd, -2px -2px 2px #dddddd;
+	color: green
+}
+
+.p-grid {
+	display: flex;
+	justify-content: center;
+	margin-top: 100px;
+}
+
+.ui-panel {
+	box-shadow: 2px 2px 2px #dddddd, -2px -2px 2px #dddddd;
+}
+</style>
+<h:body>
+	<dir class="p-grid ">
+	
+		<div class="p-col-5">
+			<h:form>
+				<p:panel>
+					<h:panelGrid id="grid" columns="2" cellspacing="8"
+						style="width:100%">
+						<f:facet name="header">
+							<h:graphicImage library="images" name="zene.png" />
+						</f:facet>
+						<p:outputLabel styleClass="label" for="id" value="IDENTIFIANT" />
+						<p:inputText styleClass="champ" id="id"
+							value="#{loginController.identifiant}"
+							requiredMessage="Vous devez entrez votre identifiant !"
+							validatorMessage="Identifiant ou mot de passe incorrect !"
+							required="true">
+							<f:validateLength minimum="7" maximum="20" />
+						</p:inputText>
+						<p:outputLabel styleClass="label" for="pass" value="MOT DE PASSE" />
+						<p:inputText type="password" styleClass="pass champ" id="pass"
+							value="#{loginController.password}"
+							requiredMessage="Vous devez entrez votre mot de passe !"
+							validatorMessage="Identifiant ou mot de passe incorrect !"
+							required="true">
+							<f:validateLength minimum="3" maximum="20" />
+						</p:inputText>
+						<f:facet name="footer">
+							<p:messages id="msg" />
+						</f:facet>
+					</h:panelGrid>
+					<p:commandButton id="submit" styleClass="identification"
+						value="IDENTIFICATION" icon="fa fa-fw fa-tag" process="@form"
+						update="msg" action="#{loginController.execute()}" ajax="false" />
+				</p:panel>
+			</h:form>
+		</div>
+	</dir>
+</h:body>
+</html>
+

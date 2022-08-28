@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:decorate template="../resources/template/patron.xhtml" >
+        <ui:define name="content" > 
+            <p:growl id="message" showDetail="true" />
+            <composants:now message="Créer une nouvelle agence"/>  
+            <h:form> 
+                <p:confirmDialog message="Voulez vous enregistrer cette agence ?"
+                                 header="Création d'une agence" severity="info"
+                                 showEffect="size" hideEffect="size"
+                                 widgetVar="cd">                    
+                    <h:panelGrid id="box" styleClass="grid" columns="2" cellspacing="10">
+                        <p:outputLabel value="Identifiant du gérant " />
+                        <p:outputLabel value="#{action.respo.id}" />
+                        <p:outputLabel value="Nom du gerant"/>
+                        <p:outputLabel value="#{action.respo.nom}"/>
+                        <p:outputLabel value="Prénom du gerant"/>
+                        <p:outputLabel value="#{action.respo.prenom} "/>
+                        <p:outputLabel value="Email" />
+                        <p:outputLabel value="#{action.respo.email}" />
+                        <p:outputLabel value="Téléphone" />
+                        <p:outputLabel value="#{action.respo.phone}" />    
+                        <p:outputLabel value="Emplacement" />  
+                        <p:outputLabel value="#{action.agence.pays} / #{config.agence.ville}"/> 
+                        <p:outputLabel value="Solde de l'agence" />  
+                        <p:outputLabel value="#{action.agence.solde}" /> 
+                        <p:commandButton id="conf-ag" style="background-color: #dddddd"  styleClass="btn" value="Confirmer" actionListener="#{action.createAgence()}"
+                                         update="message" oncomplete="PF('cd').hide()"/>
+                        <p:commandButton style="background-color: #dddddd"  styleClass="btn" value="Annuler" onclick="PF('cd').hide();" type="button" />
+                    </h:panelGrid>   
+                </p:confirmDialog> 
+                <div class="p-grid"> 
+                    <div class="p-col-5 p-m-2">  
+                        <h:panelGrid columns="1" cellspacing="8" styleClass="grid">  
+                            <p:outputLabel value="Identifiant du gerant de l'Agence" />
+                            <p:inputText value="#{action.respo.id}" disabled="true" styleClass="champ"> 
+                                <f:ajax event="blur" execute="@this" />
+                            </p:inputText>
+                            <p:outputLabel value="Prénom " />
+                            <p:inputText value="#{action.respo.prenom}" styleClass="champ"> 
+                                <f:ajax event="blur" execute="@this" render="box" />
+                            </p:inputText>
+                            <p:outputLabel value="Nom " />
+                            <p:inputText value="#{action.respo.nom}"  styleClass="champ"> 
+                                <f:ajax event="blur" execute="@this" render="box"  />
+                            </p:inputText> 
+                            <p:outputLabel value="Téléphone" />
+                            <p:inputText value="#{action.respo.phone}" styleClass="champ"> 
+                                <f:ajax event="blur" execute="@this" render="box"  />
+                            </p:inputText>
+                            <p:outputLabel value="Email" />
+                            <p:inputText value="#{action.respo.email}" styleClass="champ"> 
+                                <f:ajax event="blur" execute="@this" render="box"  />
+                            </p:inputText> 
+                            <p:outputLabel value="Mot de passe" />
+                            <p:inputText  type="password" value="#{action.respo.mot_de_passe}" styleClass="champ"> 
+                                <f:ajax event="blur" execute="@this" render="box"  />
+                            </p:inputText> 
+                        </h:panelGrid> 
+                    </div> 
+                    <div   class="p-col-5 p-m-2">   
+                        <h:panelGrid columns="1" cellspacing="8" styleClass="grid">                           
+                            <p:outputLabel value="Pays" />
+                            <p:inputText value="#{action.agence.pays}" styleClass="champ"> 
+                                <f:ajax event="blur" execute="@this"  render="box" />
+                            </p:inputText>
+                            <p:outputLabel value="Ville" />
+                            <p:inputText value="#{action.agence.ville}" styleClass="champ"> 
+                                <f:ajax event="blur" execute="@this" render="box"  />
+                            </p:inputText> 
+                            <p:outputLabel value="Solde de l'agence" />
+                            <p:inputText value="#{action.agence.solde}" styleClass="champ"> 
+                                <f:ajax event="blur" execute="@this" render="box"  />
+                            </p:inputText>   
+                            <p:commandButton type="button" styleClass="btn" style="background-color: #dddddd" value="Valider" onclick="PF('cd').show()"/>   
+                        </h:panelGrid>   
+                    </div> 
+                </div> 
+            </h:form>
+        </ui:define>
+    </ui:decorate>
+</html>
+

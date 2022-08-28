@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="../resources/template/patron.xhtml" >
+        <ui:define name="content" >
+            <style type="text/css">
+                .ui-carousel{
+                    border: 0px;
+                }
+                .ui-carousel-header{
+                    background-color: white;
+                    color: #045491;
+                }
+                .ui-carousel-footer{
+                    background-color: white;
+                    color: #045491;
+                }
+                .ui-datagrid-content{
+                    border: 0px;
+                }
+                .ui-panel-titlebar{
+                    background-color: #FFFFFF;
+                    border: 0px;
+                     
+                }
+                .ui-panel-title{
+                    color: #045491;
+                }
+            </style>
+
+            <composants:now message="Mes Agences"/> 
+            <br/><br/> 
+            <p:dataGrid  styleClass="datag" value="#{info.xen.agences()}" var="ag" columns="2">
+                <p:panel header="#{ag.id}" >
+                    <h:panelGrid style="width:100%"  columns="2"> 
+                        <p:outputLabel value="Identifiant du Gérant" />
+                        <p:outputLabel value="#{ag.personne.id}" />
+                        <p:outputLabel value="Nom du Gérant " />
+                        <p:outputLabel value="#{ag.personne.nom} #{ag.personne.prenom}"/>
+                        <p:outputLabel value="Date de Création" />
+                        <p:outputLabel value="#{ag.ouverture}">
+                            <f:convertDateTime type="date" timeStyle="short" dateStyle="short"/>
+                        </p:outputLabel>
+                        <p:outputLabel value="Emplacement" />
+                        <p:outputLabel value="#{ag.ville}" />
+                        <p:outputLabel value="Solde de l'agence" />
+                        <p:outputLabel value="#{ag.solde}" />
+                        <p:outputLabel value="Etat de l'agence" />
+                        <p:outputLabel value="#{ag.etat}" />  
+                    </h:panelGrid>
+                </p:panel>                      
+            </p:dataGrid>   
+        </ui:define>
+    </ui:composition>
+</html>
+

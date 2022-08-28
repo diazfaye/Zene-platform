@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants">   
+
+    <h:body> 
+        <ui:composition template="../resources/template/gerant.xhtml" >  
+            <ui:define name="content" > 
+                <composants:now  message="Tableau de bord" />
+                <br/>
+                <div class="p-grid container p-justify-center"> 
+                    <div class="p-col-3 info p-m-1">
+                        <composants:info message="SOLDE DU COMPTE" 
+                                         nombre="#{info.xen.agence(zeneController.currentPersonne.agence.id).solde}" 
+                                         imageName="money-euro.png"/>
+                    </div>
+                    <div class="p-col-3 info p-m-1">
+                        <composants:info message="RETRAITS DU JOUR" 
+                                         nombre="#{info.xen.nbRetraitsDuJour(zeneController.currentPersonne.agence.id)}"
+                                         imageName="price.png"/>
+                    </div>
+                    <div class="p-col-3 info p-m-1">  
+                        <composants:info message="TRANSFERTS DU JOUR" 
+                                         nombre="#{info.xen.nbTransfertsDuJour(zeneController.currentPersonne.agence.id)}" 
+                                         imageName="price.png"/>
+                    </div>    
+                    <div class="p-col-3 info p-m-1">  
+                        <composants:info message="TRANSFERTS " 
+                                         nombre="#{info.xen.transferts(zeneController.currentPersonne.agence.id).size()}"  
+                                         imageName="price.png"/>
+                    </div>
+                    <div class="p-col-3 info p-m-1">  
+                        <composants:info message="RETRAITS" 
+                                         nombre="#{info.xen.retraits(zeneController.currentPersonne.agence.id).size()}" 
+                                         imageName="price.png"/>
+                    </div>
+                    <div class="p-col-3 info p-m-1">  
+                        <composants:info message="TRANSACTIONS TOTAL" 
+                                         nombre="#{info.xen.transfertsETRetraits(zeneController.currentPersonne.agence.id).size()}" 
+                                         imageName="price.png"/>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

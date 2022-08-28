@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="imageName"  />
+        <cc:attribute required="true" name="message" />
+        <cc:attribute name="nombre" />
+        <cc:attribute name="gerant" />
+        <cc:attribute name="agence" />
+        <cc:attribute name="montant" />
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:panelGrid style="text-align: center" columns="1" cellspacing="5" >
+            <h:graphicImage library="images" name="#{cc.attrs.imageName}" />
+            <h:panelGroup>
+                <h:panelGrid columns="1" cellspacing="5px" >
+                    <p:outputLabel style="" value="#{cc.attrs.message}" />
+                    <p:outputLabel style="color: blue; text-align: center" value="#{cc.attrs.nombre}" />
+                    <p:outputLabel value="#{cc.attrs.agence}" />
+                    <p:outputLabel value="#{cc.attrs.gerant}" />
+                    <p:outputLabel value="#{cc.attrs.montant}" />
+                </h:panelGrid>
+            </h:panelGroup>
+        </h:panelGrid>
+    </cc:implementation>
+</html>

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="../resources/template/gerant.xhtml">
+        <ui:define name="content" >
+            <composants:now message="Mes commisions sur les Retraits"/>
+            <br/> 
+            <p:dataTable value="#{info.xen.retraits(zeneController.currentPersonne.agence.id)}" var="trans" >     
+                <p:column styleClass="colonne" headerText="Numero">
+                    <p:outputLabel styleClass="element" value="#{trans.id}" />
+                </p:column>
+                <p:column styleClass="colonne" headerText="Montant">
+                    <p:outputLabel styleClass="element" value="#{trans.montant}" />
+                </p:column>
+                <p:column styleClass="colonne" headerText="Frais">
+                    <p:outputLabel styleClass="element" value="#{trans.frais}" />
+                </p:column>  
+                <p:column styleClass="colonne" headerText="Date">
+                    <p:outputLabel styleClass="element" value="#{trans.tdate}" >
+                        <f:convertDateTime type="both" timeStyle="short" dateStyle="short"/>
+                    </p:outputLabel>
+                </p:column> 
+                <p:column styleClass="colonne" headerText="Ma commission">
+                    <p:outputLabel styleClass="element" value="#{trans.agencegain}" />
+                </p:column>  
+                <p:column styleClass="colonne" headerText="Type">
+                    <p:outputLabel styleClass="element" value="#{trans.type}" />
+                </p:column>  
+                <f:facet name="footer">
+                    Total : #{info.xen.commissionsRetraits(zeneController.currentPersonne.agence.id)}  
+                </f:facet>
+            </p:dataTable>  
+        </ui:define>
+    </ui:composition>
+</html>
+

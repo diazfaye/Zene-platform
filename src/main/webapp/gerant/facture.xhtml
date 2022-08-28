@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">   
+
+    <h:body> 
+        <ui:composition template="../resources/template/gerant.xhtml" >  
+            <ui:define name="content" > 
+                <composants:now  message="Payer Une facture" />
+                <br/>
+                <h:form> 
+                    <p:growl id="msg"/>
+                    <h:panelGrid columns="2" cellspacing="10">
+                        <p:inputText placeholder="Numero du facture" value="#{info.numerofacture}">
+                            <f:ajax event="blur" execute="@this" />
+                        </p:inputText>
+                        <p:commandButton type="button" value="Chercher" onclick="PF('cd').show()" >
+                           
+                        </p:commandButton>
+                    </h:panelGrid>
+                    <p:confirmDialog message="Payement d'une Facture"
+                                     header="Initiation d'un paiement" severity="info"
+                                     showEffect="size" hideEffect="size" widgetVar="cd">
+                        <ui:remove> 
+                       
+                        <p:dataTable id="table"  value="" > 
+                            <p:column styleClass="colonne" headerText="Numero">
+                                <p:outputLabel styleClass="element" value="#{info.facture.id}" />
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Montant">
+                                <p:outputLabel styleClass="element" value="#{info.facture.montant}" />
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Client">
+                                <p:outputLabel styleClass="element" value="#{info.facture.client}" />
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Date début">
+                                <p:outputLabel styleClass="element" value="#{info.facture.debut}" />
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Date Fin">
+                                <p:outputLabel styleClass="element" value="#{info.facture.fin}" />
+                            </p:column> 
+                            <p:column styleClass="colonne" headerText="Etat">
+                                <p:outputLabel styleClass="element" value="#{info.facture.etat}" />
+                            </p:column>  
+                            <p:column styleClass="colonne" headerText="Amende">
+                                <p:outputLabel styleClass="element" value="#{info.facture.amende}" />
+                            </p:column> 
+                        </p:dataTable>
+                             </ui:remove>
+                        <h:commandButton  value="Effectuer" onclick="PF('cd').hide()"  >
+                            <f:ajax event="click" execute="@this" render="msg"   /> 
+                        </h:commandButton>
+                    </p:confirmDialog>  
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

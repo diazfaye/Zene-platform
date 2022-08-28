@@ -1,0 +1,247 @@
+ 
+/* 
+    Created on : 31 juil. 2020, 14:21:38
+    Author     : alhoussene
+*/
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+}
+
+.box {
+    background-color: #ffffff;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-radius: 4px;
+    margin-top: 35px;
+} 
+
+.p-col-fixed{
+    box-shadow: 2px 2px 2px black, -2px -2px 2px rgba(0,0,0,0);  
+}
+
+.p-col-6 > .container{
+    display: flex;
+    align-content: center;
+}
+
+body .ui-steps .ui-steps-item {
+    width: 30%;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    background-color: white;
+
+}
+
+.tab{
+    background-color: red;
+}
+body .ui-state-highlight {
+    text-shadow: none !important;
+}
+
+body .ui-steps.custom {
+    margin-bottom: 30px;
+}
+
+body .ui-steps.custom .ui-steps-item .ui-menuitem-link {
+    height: 0px;
+    padding: 0 1em;
+    overflow: visible; 
+    display: block;
+    background-color: black;
+}
+
+body .ui-steps.custom .ui-steps-item .ui-menuitem-link .ui-steps-number {
+    background-color: black;
+    color: #FFFFFF; 
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin-top: -15px;
+    margin-bottom: 10px;
+    position: relative;
+    top: -3px;
+}
+.ui-accordion.tab{
+    background-color: red;
+}
+
+body .ui-steps.custom .ui-steps-item .ui-menuitem-link .ui-steps-title {
+    margin-top: -6px;
+}
+
+body .ui-steps.custom .ui-steps-item.ui-state-highlight .ui-menuitem-link .ui-steps-title {
+    color: #555;
+}
+.ui-inputtext.champ { 
+    box-shadow: 0px 0px 0px black, -0px -0px 0px rgba(0,0,0,0);  
+    font-weight: bold;
+}
+.ui-tabs.tab1{
+    border: 0px solid; 
+}
+.ui-tabs.tab1.nav{
+    background-color: red;
+}
+
+
+.ui-menuitem{
+    margin-left: 15px;
+    color: black;
+}
+
+.ui-menu.admin-menu{
+    background-color: rgba(0,0,0,0);
+    border: 0px;
+} 
+.ui-layout-north{
+    border: 0px;  
+
+}
+.ui-layout-sud{
+    height: 100px;
+    background-color: darkgreen;
+
+}
+.ui-layout-west{
+    /*  box-shadow: 2px 2px 2px black, -2px -2px 2px rgba(0,0,0,0); 
+       border-radius: 10px; */ 
+    border: 1px solid; 
+}
+
+.ui-layout-center{
+    border: 0px;
+}
+.ui-button.home{
+    width:90%;
+}
+.ui-layout{
+    height: 600px;
+}
+.info{ 
+    border: 1px solid white; 
+    color: black   ;
+    font-size: 12px;
+}
+
+
+.ui-datatable-header{
+    background-color: red;
+}
+body{
+    font-size: 15px;
+}
+.connection{
+    width: 100%;
+    background-color: lawngreen;
+    color: black;
+    font-size: 15px;
+}
+.connection:hover{ 
+    background-color: #045491;
+    box-shadow: 0px 0px 0px black, -0px -0px 0px rgba(0,0,0,0); 
+    color: black; 
+}
+.login-form{
+    margin-top: 100px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 2px 2px 5px black, -2px -2px 5px rgba(0,0,0,0)
+}
+
+.ui-inputtext.champ{
+    width: 100%;
+}
+.grid{
+    width: 100%;
+}
+/****************** Nouvelles templates ***************************************************************************/
+
+.left{ 
+    display: flex; 
+    flex-direction: row-reverse;   
+    height: 84vh ;
+}
+
+.header{ 
+    height: 60px;
+    display: flex; 
+    box-shadow: 5px 5px 5px #dddddd
+}
+.footer{ 
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    background-color: #045491;
+    height: 50px;
+}
+.ui-menu.menu{
+    background-color: white;
+    border: 0px;
+    color: black;
+} 
+
+
+.ui-menuitem-text{
+    text-align: center;
+    padding-left: 6px;  
+}
+.ui-menuitem-link{
+    color: #045491; 
+}
+.submenu{ 
+    border: 0px; 
+    background-color: white;
+    color: #045491; 
+}
+.submenu:hover{  
+    background-color:#dddddd;
+    border: 1px;
+}
+.user{
+    display: flex;
+    justify-content: flex-end; 
+} 
+.ui-button.btn{  
+    border: 0px;
+    width: 100%; 
+    background-color: white;
+    color: #045491;
+    /* box-shadow: 2px 2px 2px black, -2px -2px 2px rgba(0,0,0,0);*/
+}
+.ui-button.btn.text{ 
+    padding-left: 15px;
+
+}
+.ui-button.btn:hover{ 
+    background-color:#dddddd;
+    border: 1px;
+}
+.ui-datatable-header.table{
+    background-color: white;
+    color: #045491;
+    text-align: center;
+}
+.colonne{
+    color: #045491;
+    text-align: center;
+    background-color: white;
+}
+.ui-outputlabel.element{
+    color: black;
+    font-size: 12px;
+}
+.ui-dialog-titlebar{
+    background-color: #ffffff;
+}
+.ui-datatable-header{
+    background-color: #ffffff
+}
+.ui-datatable-footer{
+    background-color: #ffffff
+}

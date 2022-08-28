@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="../resources/template/patron.xhtml" >
+        <ui:define name="content"> 
+            <composants:now message="Configuration de base"/>  
+            <br/><br/>
+            <style type="text/css">
+                .ui-accordion-header{
+                    background-color: #FFFFFF; 
+                    font-size: 15px;
+                }
+            </style>
+            <p:growl id="msg" />
+            <p:accordionPanel activeIndex="" >
+                <p:tab title="Ajouter un administrateur">
+                    <h:form>  
+                        <div class="p-grid"> 
+                            <div class="p-col-5 p-m-md-10" > 
+                                <h:panelGrid columns="1" cellspacing="8" styleClass="grid">  
+                                    <p:outputLabel value="Identifiant"/>
+                                    <p:inputText value="#{action.respo.id}" disabled="true" styleClass="champ">
+                                        <p:ajax event="blur" update="box" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Prénom " />
+                                    <p:inputText value="#{action.respo.prenom}" styleClass="champ">
+                                        <p:ajax event="blur" update="box" />
+                                    </p:inputText>
+
+                                    <p:outputLabel value="Nom " />
+                                    <p:inputText value="#{action.respo.nom}" styleClass="champ">
+                                        <p:ajax event="blur" update="box" />
+                                    </p:inputText> 
+                                    <p:outputLabel value="Téléphone" />
+                                    <p:inputText value="#{action.respo.phone}" styleClass="champ">
+                                        <p:ajax event="blur" update="box" />
+                                    </p:inputText>
+                                    <p:outputLabel value="Email" />
+                                    <p:inputText value="#{action.respo.email}" styleClass="champ">
+                                        <p:ajax event="blur" update="box" />
+                                    </p:inputText> 
+                                    <p:outputLabel value="Mot de passe" />
+                                    <p:inputText value="#{action.respo.mot_de_passe}" styleClass="champ" type="password">
+                                        <p:ajax event="blur" update="box" />
+                                    </p:inputText>
+                                    <p:commandButton id="admin-submit" value="Ajouter" type="button" onclick="PF('cd').show()" />
+                                </h:panelGrid>
+                                <p:dialog header="Ajout d'un administrateur"  modal="false"
+                                          showEffect="size" hideEffect="size"
+                                          widgetVar="cd">
+                                    <h:panelGrid id="box" columns="2" cellspacing="10"> 
+                                        <p:outputLabel value="Nom du responsable"/>
+                                        <p:outputLabel value="#{action.respo.nom}"/>
+                                        <p:outputLabel value="Prénom du responsable"/>
+                                        <p:outputLabel value="#{action.respo.prenom} "/>
+                                        <p:outputLabel value="Identifiant du responsable " />
+                                        <p:outputLabel value="#{action.respo.id}" />
+                                        <p:outputLabel value="Email " />
+                                        <p:outputLabel value="#{action.respo.email}" />
+                                        <p:outputLabel value="Téléphone" />
+                                        <p:outputLabel value="#{action.respo.phone}" />   
+                                        <p:commandButton id="conf-adm" value="Confirmer" onclick="PF('cd').hide()">
+                                            <p:ajax event="click" process="@this" update="msg"  listener="#{action.addAdmin()}"/>
+                                        </p:commandButton>  
+                                        <p:commandButton  type="button" value="Annuler" onclick="PF('cd').hide()"/>
+                                    </h:panelGrid> 
+                                </p:dialog> 
+                            </div>  
+                        </div>
+                    </h:form> 
+                </p:tab>
+                <p:tab title="Modifier/Supprimer un Administrateur">
+                    <h:form> 
+                        <p:dataTable value="#{info.xen.admins()}" var="ad" > 
+                            <p:column styleClass="colonne" headerText="Identifiant">
+                                <p:outputLabel styleClass="element" value="#{ad.id}" />
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Nom">
+                                <p:outputLabel styleClass="element" value="#{ad.nom}" />
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Prénom">
+                                <p:outputLabel styleClass="element" value="#{ad.prenom}"/>
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Mot de passe">
+                                <p:inputText styleClass="champ" type="password" value="#{info.password}">
+                                    <f:ajax event="blur" execute="@this" />
+                                </p:inputText>
+                            </p:column>
+                            <p:column  styleClass="colonne" headerText="Modifier">
+                                <p:commandButton styleClass="btn" value="Valider" >
+                                    <f:ajax event="click"  listener="#{info.appliquer(ad.id)}" execute="@this" render="msg"  />
+                                </p:commandButton> 
+                            </p:column> 
+                              <p:column  styleClass="colonne" headerText="Supprimer">
+                                  <p:commandButton style="color: red" styleClass="btn" icon="fa fa-minus" value="Valider" >
+                                      <f:ajax event="click"  listener="#{action.supprimerAdmin(ad.id)}" execute="@this" render="msg"  />
+                                </p:commandButton>  
+                            </p:column> 
+                            <f:facet name="footer">
+                                Total : #{info.xen.admins().size()}
+                            </f:facet>
+                        </p:dataTable> 
+                    </h:form>
+                </p:tab>
+                <p:tab title="Modifier les mots de passes des Gerants">
+                    <h:form> 
+                        <p:dataTable value="#{info.xen.agenciers()}" var="ad" > 
+                            <p:column styleClass="colonne" headerText="Identifiant">
+                                <p:outputLabel styleClass="element" value="#{ad.id}" />
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Nom">
+                                <p:outputLabel styleClass="element" value="#{ad.nom}" />
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Prénom">
+                                <p:outputLabel styleClass="element" value="#{ad.prenom}"/>
+                            </p:column>
+                            <p:column styleClass="colonne" headerText="Nouveau mot de passe">
+                                <p:inputText styleClass="champ" type="password" value="#{info.password}">
+                                    <f:ajax event="blur" execute="@this" />
+                                </p:inputText>
+                            </p:column>
+                            <p:column  styleClass="colonne" headerText="Action">
+                                <p:commandButton styleClass="btn" value="Valider" >
+                                    <f:ajax event="click"  listener="#{info.appliquer(ad.id)}" execute="@this" render="msg"  />
+                                </p:commandButton> 
+                            </p:column>  
+                            <f:facet name="footer">
+                                Total : #{info.xen.agenciers().size()}
+                            </f:facet>
+                        </p:dataTable> 
+                    </h:form>
+                </p:tab>
+                <p:tab title="Ajouter une Entreprise">
+                    <h:form> 
+                        <p:dialog  header="Initiation d'une entreprise"  modal="false"
+                                   showEffect="size" hideEffect="size"
+                                   widgetVar="cd1">                    
+                            <h:panelGrid id="box1" styleClass="grid" columns="2" cellspacing="10">
+                                <p:outputLabel value="Nom de l'entreprise"/>
+                                <p:outputLabel value="#{action.entreprise.nom}"/>
+                                <p:outputLabel value="Solde de l'entreprise"/>
+                                <p:outputLabel value="#{action.entreprise.solde} "/> 
+                                <p:commandButton id="cre-ent" style="background-color: #dddddd"  styleClass="btn" value="Confirmer" actionListener="#{action.creerEntreprise()}"
+                                                 update="msg" oncomplete="PF('cd1').hide()"/>
+                                <p:commandButton style="background-color: #dddddd"  styleClass="btn" value="Annuler" onclick="PF('cd1').hide();" type="button" />
+                            </h:panelGrid>   
+                        </p:dialog> 
+                        <div class="p-grid"> 
+                            <div class="p-col-5 p-m-2">  
+                                <h:panelGrid columns="1" cellspacing="8" styleClass="grid">   
+                                    <p:outputLabel value="Nom de l'entreprise" />
+                                    <p:inputText value="#{action.entreprise.nom}" styleClass="champ"> 
+                                        <f:ajax event="blur" render="box1" execute="@this" />
+                                    </p:inputText> 
+                                    <p:outputLabel value="Solde" />
+                                    <p:inputText value="#{action.entreprise.solde}" styleClass="champ"> 
+                                        <f:ajax event="blur" render="box1" execute="@this" />
+                                    </p:inputText> 
+                                    <p:commandButton id="ent-sub" type="btn" value="Valider" onclick="PF('cd1').show()" /> 
+                                </h:panelGrid> 
+                            </div>   
+                        </div> 
+                    </h:form>
+                </p:tab>
+                <p:tab title="Agences" >
+                    <h:form>
+                        <p:dialog style="width: 50%" widgetVar="dl2" showEffect="size" hideEffect="size" header="Suppression d'une agence" >
+                            <p:outputLabel value='Etes vous sûre de vouloir supprimer cette agence ?' /><br/>
+                            <p:outputLabel value="Si vous supprimer cette agence toutes les transactions effectuées par cette agence seront supprimées !" /><br/>
+
+                            <p:commandButton id="supp" style="color: red" value="Confirmer" oncomplete="PF('dl2).hide()" process="@this" update="mess" actionListener="#{action.supprimerAgence(action.agenceId)}" />
+                        </p:dialog>
+                        <h:panelGrid columns="1">
+                            <h:outputText  value="Identifiant de l'Agence" />
+                            <p:inputText styleClass="champ" value="#{action.agenceId}" validatorMessage="Il faut entrer un identifiant valide !" requiredMessage="Vous devez indiquer l'identifiand de l'agence"  required="true" >
+                                <f:ajax event="blur" execute="@this" render="mess" />
+                                <f:validateLength minimum="10" maximum="15" />
+                            </p:inputText>
+                            <h:panelGroup>
+                                <h:panelGrid cellspacing="10" columns="3">
+                                    <p:commandButton id='acti' value="Activer" process="@this" update="mess" actionListener="#{action.updateAgenceState()}" />
+                                    <p:commandButton id='susp' value="Suspendre" process="@this" update="mess" actionListener="#{action.updateAgenceState()}" />
+                                    <p:commandButton type="button" value="Supprimer" onclick="PF('dl2').show()" />  
+                                </h:panelGrid> 
+                                <p:messages id="mess"/>
+                            </h:panelGroup> 
+                        </h:panelGrid>
+                    </h:form>
+                </p:tab>
+                <p:tab title="Entreprises">
+                    <h:form>
+                        <p:dialog style="width: 50%" widgetVar="dl3" showEffect="size" hideEffect="size" header="Suppression d'une agence" >
+                            <p:outputLabel value='Etes vous sûre de vouloir supprimer cette entreprise ?' /><br/>
+                            <p:outputLabel value="Si vous supprimer cette entreprise toutes les transactions effectuées par cette entreprise seront supprimées !" /><br/>
+                            <p:commandButton id="supp1" style="color: red" value="Confirmer" oncomplete="PF('dl3).hide()" process="@this" update="mess1" actionListener="#{action.supprimerEntreprise(action.entrepriseid)}" /> 
+                        </p:dialog>
+                        <h:panelGrid columns="1">
+                            <h:outputText  value="Identifiant de l'Entreprise" />
+                            <p:inputText styleClass="champ" value="#{action.entrepriseid}" validatorMessage="Il faut entrer un identifiant valide !" requiredMessage="Vous devez indiquer l'identifiand de l'agence"  required="true" >
+                                <f:ajax event="blur" execute="@this" render="mess1" />
+                                <f:validateLength minimum="10" maximum="15" />
+                            </p:inputText>
+                            <h:panelGroup>
+                                <h:panelGrid cellspacing="10" columns="3">
+                                    <p:commandButton id='acti1' value="Activer" process="@this" update="mess1" actionListener="#{action.updateEntrepriseState()}" />
+                                    <p:commandButton id='susp1' value="Suspendre" process="@this" update="mess1" actionListener="#{action.updateEntrepriseState()}" />
+                                    <p:commandButton type="button" value="Supprimer" onclick="PF('dl3').show()" />  
+                                </h:panelGrid> 
+                                <p:messages id="mess1"/>
+                            </h:panelGroup> 
+                        </h:panelGrid>
+                    </h:form>
+                </p:tab>                
+                
+            </p:accordionPanel> 
+        </ui:define>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants"> 
+    <h:body>
+        <ui:composition template="../resources/template/gerant.xhtml" >  
+            <ui:define name="content">
+                <composants:now  message="Effectuer un Tranansfert"/>
+                <br/><br/> 
+                <h:form> 
+                    <p:confirmDialog message="Voulez vous effectuez ce transfert ?"
+                                     header="Initiation d'un transfert" severity="info"
+                                     showEffect="size" hideEffect="size"
+                                     widgetVar="cd">
+                        <h:panelGrid id="grid" columns="2" cellspacing="6" >
+                            <p:outputLabel value="Nom de l'expediteur" />
+                            <p:outputLabel value="#{action.nomExpediteur}" />
+                            <p:outputLabel value="Prénom de l'expediteur" />
+                            <p:outputLabel value="#{action.prenomExpediteur}" />
+                            <p:outputLabel value="Montant à Envoyer" />
+                            <p:outputLabel value="#{action.montant}" />
+                            <p:outputLabel value="Nom du destinatairer" />
+                            <p:outputLabel value="#{action.nomDestinataire}" />
+                            <p:outputLabel value="Prénom du destinataire" />
+                            <p:outputLabel value="#{action.prenomDestinataire}" />
+                            <p:outputLabel value="Code de Tetrait" />  
+                            <p:outputLabel value="#{action.transaction.code}" />
+                            <p:commandButton value="Confirmer"  
+                                             update="msg" onclick="PF('cd').hide()">
+                                <f:ajax event="click" execute="@this" render="msg" listener="#{action.transferer(zeneController.currentPersonne.agence.id)}"/>
+                            </p:commandButton> 
+                            <p:commandButton type="button" value="Annuler" onclick="PF('cd').hide()" />  
+                        </h:panelGrid> 
+                    </p:confirmDialog> 
+                    <p:growl id="msg" /> 
+                    <div class="p-grid">  
+                        <div class="p-col-6">
+                            <h:panelGrid styleClass="grid" columns="1" cellspacing="15">
+                                <f:facet name="header">
+                                    <p:outputLabel value="Expéditeur" />
+                                </f:facet>
+                                <h:panelGroup>
+                                    <span class="ui-float-label">
+                                        <p:inputText styleClass="champ" value="#{action.nomExpediteur}" id="nom-exp"> 
+                                            <f:ajax event="blur" execute="@this" render="grid" />
+                                        </p:inputText>
+                                        <p:outputLabel for="@previous" value="Nom de l'expédietur" />
+                                    </span>                                
+                                </h:panelGroup>
+                                <h:panelGroup>
+                                    <span class="ui-float-label">
+                                        <p:inputText styleClass="champ" value="#{action.prenomExpediteur}" id="prenom-exp" > 
+                                            <f:ajax event="blur" execute="@this" render="grid" />
+                                        </p:inputText>
+                                        <p:outputLabel for="@previous" value="Prénom de l'expédietur" />
+                                    </span>                                
+                                </h:panelGroup> 
+                                <h:panelGroup>
+                                    <span class="ui-float-label">
+                                        <p:inputText styleClass="champ" value="#{action.montant}" id="montant"> 
+                                            <f:ajax event="blur" execute="@this" render="grid" />
+                                        </p:inputText>
+                                        <p:outputLabel for="@previous" value="Montant à envoyer" />
+                                    </span>                                
+                                </h:panelGroup>
+                            </h:panelGrid>
+                            <h:panelGrid styleClass="grid" columns="1" cellspacing="15">
+                                <f:facet name="header">
+                                    <p:outputLabel value="Destinataire" />
+                                </f:facet>
+                                <h:panelGroup>
+                                    <span class="ui-float-label">
+                                        <p:inputText styleClass="champ" value="#{action.nomDestinataire}" id="nom-des"> 
+                                            <f:ajax event="blur" execute="@this" render="grid" />
+                                        </p:inputText>
+                                        <p:outputLabel for="@previous" value="Nom du destinataire" />
+                                    </span>                                
+                                </h:panelGroup>
+                                <h:panelGroup>
+                                    <span class="ui-float-label">
+                                        <p:inputText styleClass="champ" value="#{action.prenomDestinataire}" id="prenom-des"> 
+                                            <f:ajax event="blur" execute="@this" render="grid" />
+                                        </p:inputText>
+                                        <p:outputLabel for="@previous" value="Prénom du destinataire" />
+                                    </span>                                
+                                </h:panelGroup> 
+                                <h:panelGroup>
+                                    <span class="ui-float-label">
+                                        <p:inputText styleClass="champ" value="#{action.transaction.code}" id="code" />
+                                        <p:outputLabel for="@previous" value="Code de Retrait" />
+                                    </span>                                
+                                </h:panelGroup>
+                                <p:commandButton type="button" value="Valider" onclick="PF('cd').show()" />  
+                            </h:panelGrid>
+                        </div>  
+                    </div> 
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

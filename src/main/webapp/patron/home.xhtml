@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:composants="http://xmlns.jcp.org/jsf/composite/composants"> 
+    <h:body>
+        <ui:composition template="../resources/template/patron.xhtml"> 
+            <ui:define name="content"> 
+                <composants:now message="Tableau de bord"/>
+                <div class="p-grid  p-justify-center">
+                    <div class="p-col-3 info p-m-1" >   
+                        <composants:info message="AGENCES ACTIVES" imageName="agence-active.png"
+                                         nombre="#{info.xen.nbAgencesActives()}" />
+                    </div>                      
+                    <div class="p-col-3 p-m-1 info" >   
+                        <composants:info message="TRANSFERTS" imageName="price.png"
+                                         nombre="#{info.xen.transferts().size()}" />  
+                    </div>
+                    <div class="p-col-3 p-m-1 info" >   
+                        <composants:info message="AGENCES INACTIVES" imageName="agence-suspendu.png" 
+                                         nombre="#{info.xen.nbAgencesInactives()}"/>
+                    </div>
+
+                    <div class="p-col-3 p-m-1 info" >   
+                        <composants:info message="RETRAITS" imageName="price.png" 
+                                         nombre="#{info.xen.retraits().size()}" /> 
+                    </div> 
+                    <div class="p-col-3 p-m-1 info" >   
+                        <composants:info message="TRANSACTIONS TOTAL" imageName="price.png" 
+                                         nombre="#{(info.xen.retraits().size() + info.xen.transferts().size())}" /> 
+                    </div> 
+                    <div class="p-col-3 p-m-1 info" >   
+                        <composants:info message="RECHARGES" imageName="price.png" 
+                                         nombre="#{info.xen.recharges().size()}" />  
+                    </div> 
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
